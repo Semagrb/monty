@@ -1,28 +1,40 @@
 #include "monty.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-/* Define the global stack variable (stack_t *stack) */
+/**
+ * push - Pushes an element onto the stack
+ * @stack: Pointer to the stack
+ * @value: The value to push onto the stack
+ */
+void push(stack_t **stack, int value)
+{
+stack_t *new_node = malloc(sizeof(stack_t));
+if (new_node == NULL)
+{
+fprintf(stderr, "Error: malloc failed\n");
+exit(EXIT_FAILURE);
+}
+new_node->n = value;
+new_node->prev = NULL;
+new_node->next = *stack;
 
-void push(stack_t **stack, int value) {
-    /* Implement the push opcode here */
+if (*stack != NULL)
+(*stack)->prev = new_node;
+*stack = new_node;
 }
 
-void pall(stack_t **stack, unsigned int line_number) {
-    /* Implement the pall opcode here */
+/**
+ * pall - Prints all values on the stack
+ * @stack: Pointer to the stack
+ * @line_number: The current line number
+ */
+void pall(stack_t **stack, unsigned int line_number)
+{
+(void)line_number; /* To suppress unused parameter warning */
+
+stack_t *current = *stack;
+while (current != NULL)
+{
+printf("%d\n", current->n);
+current = current->next;
 }
-
-int main(int argc, char *argv[]) {
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
-        return EXIT_FAILURE;
-    }
-
-    /* Open and read the input file */
-    
-    /* Parse and interpret the Monty byte code instructions */
-
-    /* Close the file and clean up resources */
-
-    return EXIT_SUCCESS;
 }
