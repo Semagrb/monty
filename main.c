@@ -1,5 +1,11 @@
 #include "monty.h"
-bus_t bus = {NULL, NULL, NULL, 0};
+#include "monty.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stddef.h>
+#include <string.h>
+
+
 /**
 * main - monty code interpreter
 * @argc: number of arguments
